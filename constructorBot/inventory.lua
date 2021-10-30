@@ -7,12 +7,12 @@ require("navigationAPI")
 -- Where the items database should be stored
 ITEM_DB_LOC = "/home/itemsdb.db"
 
--- datebase storing all known items
+-- Datebase storing all known items
 local items = {}
 
 -- Item is a type referencing the location of an item,
 -- alongside functions for retrieving them
-Item = {}
+local Item = {}
 Item.__index = Item
 
 -- Constructor for item
@@ -46,7 +46,7 @@ function loadItemTable()
   f:close()
 end
 
--- Autoload the content of the database into the itemtable
+-- Autoload the content of the database into the item table
 loadItemTable()
 
 -- Clears the contents of the item table
@@ -75,7 +75,7 @@ end
 
 -- Makes the robot automatically retrieve the item
 -- Parameters: name of the item to retireive,
--- slot the item should be moved into (slots are 1 indexed)
+-- slot the item should be moved into (slots are 1 indexed),
 -- ammout of the item to retrieve
 function pickupItem(name, slot, ammount)
   i = getItem(name)

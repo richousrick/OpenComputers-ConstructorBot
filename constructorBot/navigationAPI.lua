@@ -3,14 +3,14 @@
 local robot = require("robot")
 require("cbUtils")
 
--- init location
+-- Init location
 -- Note: Y is vertical axis
 local xPos, yPos, zPos, orientation = 0,0,0,0
 
 
 -- NAVIGATION WRAPPERS
 
-  -- updates the position if moved in the current facing by the specified number of blocks
+  -- Updates the position if moved in the current facing by the specified number of blocks
   local function moved(count)
     if (orientation == 0) then
       zPos = zPos - count
@@ -23,7 +23,7 @@ local xPos, yPos, zPos, orientation = 0,0,0,0
     end
   end
 
-  -- moves the robot back a block
+  -- Moves the robot back one block
   function back()
     if(robot.back()) then
       moved(-1)
@@ -33,7 +33,7 @@ local xPos, yPos, zPos, orientation = 0,0,0,0
     end
   end
 
-  -- moves the robot the specified ammout
+  -- Moves the robot foward one block
   function forward()
     if(robot.forward()) then
       moved(1)
@@ -43,7 +43,7 @@ local xPos, yPos, zPos, orientation = 0,0,0,0
     end
   end
 
-  -- rotates the robot clockwise
+  -- Rotates the robot clockwise
   function clockwise()
     if(robot.turnRight()) then
       orientation = (orientation + 1) % 4
@@ -53,7 +53,7 @@ local xPos, yPos, zPos, orientation = 0,0,0,0
     end
   end
 
-  -- rotates the robot anticlockwise
+  -- Rotates the robot anticlockwise
   function antiClockwise()
     if(robot.turnLeft()) then
       orientation = (orientation - 1) % 4
@@ -63,7 +63,7 @@ local xPos, yPos, zPos, orientation = 0,0,0,0
     end
   end
 
-  -- moves the robot up once
+  -- Moves the robot up one block
   function up()
     if(robot.up()) then
       yPos = yPos + 1
@@ -73,7 +73,7 @@ local xPos, yPos, zPos, orientation = 0,0,0,0
     end
   end
 
-  -- moves the robot up once
+  -- Moves the robot up one block
   function down()
     if(robot.down()) then
       yPos = yPos - 1
@@ -87,7 +87,7 @@ local xPos, yPos, zPos, orientation = 0,0,0,0
 
 -- ABSOLUTE NAVIGATION
 
-  -- face the desired direction
+  -- Face the desired direction
   function facePos(target)
     if (orientation +1)%4 == target then
       robot.turnRight()
@@ -99,7 +99,7 @@ local xPos, yPos, zPos, orientation = 0,0,0,0
     orientation = target
   end
 
-  -- move to x,z,y
+  -- Move to x,z,y
   function moveTo(x, z, y)
     y = y or yPos
     -- move to X
@@ -132,7 +132,7 @@ local xPos, yPos, zPos, orientation = 0,0,0,0
     end
   end
 
-  -- go to 0,0,0 and face 0
+  -- Go to 0,0,0 and face 0
   function home()
     moveTo(0,0,0)
     facePos(0)
