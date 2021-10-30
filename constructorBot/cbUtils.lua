@@ -1,17 +1,18 @@
 -- Collection of utility functions for the ConstructBot library
 
-
--- runs func till it returns true
+-- runs func untill it returns either true or nil
 function tillDone(func)
-  while(not func()) do end
+  local r = {func()}
+  while(next(r) ~= nil and r[1] ~= true) do
+    r = {func()}
+  end
 end
 
 -- runs func, num times
 function runMany(func, num)
   local toMove = num
   while(toMove > 0) do
-    if (func()) then
-      toMove = toMove-1
-    end
+    tillDone(func)
+    toMove = toMove-1
   end
 end
